@@ -60,10 +60,21 @@ def main(args):
     )
 
     train_loader = DataLoader(
-        train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=12
+        train_dataset,
+        batch_size=args.batch_size,
+        shuffle=True,
+        num_workers=8,
+        pin_memory=True,
+        persistent_workers=True,
+        drop_last=True,
     )
     val_loader = DataLoader(
-        test_dataset, batch_size=args.batch_size, shuffle=False, num_workers=12
+        test_dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        num_workers=8,
+        pin_memory=True,
+        persistent_workers=True,
     )
 
     model = CompactConvolutionalTransformer(
